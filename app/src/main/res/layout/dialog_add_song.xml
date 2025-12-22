@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thêm Bài Hát Mới"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText android:id="@+id/et_song_name" android:hint="Tên bài hát" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <EditText android:id="@+id/et_song_desc" android:hint="Mô tả" android:layout_marginTop="10dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <EditText android:id="@+id/et_song_audio" android:hint="Link Audio (URL)" android:layout_marginTop="10dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <EditText android:id="@+id/et_song_image" android:hint="Link Ảnh Bìa (URL)" android:layout_marginTop="10dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_song_singer_id"
+            android:hint="ID Ca sĩ (Nhập số)"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_song_genre_id"
+            android:hint="ID Thể loại (Nhập số)"
+            android:inputType="number"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</ScrollView>

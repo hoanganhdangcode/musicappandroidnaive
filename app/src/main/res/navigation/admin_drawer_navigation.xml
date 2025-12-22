@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_users">
+    <fragment
+        android:id="@+id/nav_users"
+        android:name="com.example.musicapp.views.Admin.Fragment.ManagerUserFragment"
+        android:label="Quán lý người dùng"
+        tools:layout="@layout/fragment_manager_user" />
+    <fragment
+        android:id="@+id/nav_artists"
+android:name="com.example.musicapp.views.Admin.Fragment.ManagerSingerFragment"
+        android:label="Quản lý ca sĩ"
+        tools:layout="@layout/fragment_manager_singer" />
+
+    <fragment
+        android:id="@+id/nav_genres"
+android:name="com.example.musicapp.views.Admin.Fragment.ManagerGenreFragment"
+        android:label="Quản lý thể loại"
+        tools:layout="@layout/fragment_manager_genre" />
+    <fragment
+        android:id="@+id/nav_songs"
+        android:name="com.example.musicapp.views.Admin.Fragment.ManagerSongFragment"
+        android:label="Quản lý bài hát"
+        tools:layout="@layout/fragment_manager_song" />
+
+</navigation>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">   >
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_users"
+            android:icon="@drawable/ic_people"
+            android:title="Quản lý người dùng"
+
+            />
+        <item
+            android:id="@+id/nav_songs"
+            android:icon="@drawable/ic_music"
+            android:title="Quản lý bài hát"
+
+            />
+        <item
+            android:id="@+id/nav_artists"
+            android:icon="@drawable/ic_artist"
+
+            android:title="Quản lý ca sĩ" />
+        <item
+            android:id="@+id/nav_genres"
+            android:icon="@drawable/ic_category"
+
+
+            android:title="Quản lý thể loại" />
+
+    </group>
+</menu>

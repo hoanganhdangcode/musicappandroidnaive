@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_discover">
+    <fragment
+    android:id="@+id/nav_discover"
+    android:name="com.example.musicapp.views.User.UserMainFragment.DiscoverFragment"
+    android:label="Khám phá"
+    tools:layout="@layout/fragment_discover" />
+    <fragment
+        android:id="@+id/nav_library"
+        android:name="com.example.musicapp.views.User.UserMainFragment.LibraryFragment"
+        android:label="Thư viện"
+        tools:layout="@layout/fragment_library" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.example.musicapp.views.User.UserMainFragment.ProfileFragment"
+        android:label="Cá nhân"
+        tools:layout="@layout/fragment_profile" />
+
+</navigation>

@@ -17,6 +17,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.musicapp.R;
+import com.example.musicapp.views.Admin.AdminMainActivity;
+import com.example.musicapp.views.User.UserMainActivity;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class SplashActivity extends AppCompatActivity {
@@ -31,13 +33,11 @@ public class SplashActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // 1. Ánh xạ View từ XML
         ImageView logo = findViewById(R.id.imgLogo);
         TextView appName = findViewById(R.id.tvAppName);
         LinearProgressIndicator indicator = findViewById(R.id.indicator);
 
 
-        // 2. Thiết lập trạng thái ban đầu (ẩn đi bằng Alpha = 0)
         logo.setAlpha(0f);
         appName.setAlpha(0f);
         indicator.setMax(100);
@@ -49,7 +49,7 @@ public class SplashActivity extends AppCompatActivity {
         progressAnimator.start();
 
 
-        // 3. Chạy hiệu ứng hiện dần (Animation)
+
         // Logo hiện lên trong 1.5 giây
         logo.animate()
                 .alpha(1f)
@@ -64,18 +64,21 @@ public class SplashActivity extends AppCompatActivity {
                 .start();
 
 
-        // 4. Chuyển sang màn hình Login sau 3 giây
+        //  Chuyển sang màn hình Login sau 3 giây
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
                 // Tạo Intent để chuyển sang LoginActivity
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+//                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent intent = new Intent(SplashActivity.this, UserMainActivity.class);
                 startActivity(intent);
 
-                // Đóng SplashActivity lại để người dùng không back về được
                 finish();
             }
-        }, 30000); // 3000 mili giây = 3 giây
-
+        }, 3000); // 3000 mili giây = 3 giây
+//        Intent intent = new Intent(SplashActivity.this, AdminMainActivity.class);
+//        startActivity(intent);
+//
+//        finish();
     }
 }
