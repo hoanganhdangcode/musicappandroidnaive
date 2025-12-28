@@ -27,6 +27,7 @@ public class UserMainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
        BottomNavigationView bottomNav= findViewById(R.id.bottom_navigation);
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.nav_host_fragment);
@@ -36,5 +37,6 @@ public class UserMainActivity extends AppCompatActivity {
 
             NavigationUI.setupWithNavController(bottomNav, navController);
         }
+
     }
 }
