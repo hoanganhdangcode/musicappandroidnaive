@@ -21,7 +21,9 @@ import com.bumptech.glide.Glide;
 import com.example.musicapp.DTO.RegisterDTO;
 import com.example.musicapp.R;
 import com.example.musicapp.commons.ApiService;
+import com.example.musicapp.commons.LoggedUser;
 import com.example.musicapp.commons.RetrofitClient;
+import com.example.musicapp.commons.SecureStorage;
 import com.example.musicapp.views.LoginActivity;
 import com.example.musicapp.views.SignupActivity;
 
@@ -38,7 +40,7 @@ public class PlayMusicActivity extends AppCompatActivity {
     TextView tvSongName, tvSingerName;
     ImageView imageView;
     SeekBar seekBar;
-
+    SecureStorage secureStorage;
     private Handler handler = new Handler();
     private Runnable runnable;
     Intent i;
@@ -66,16 +68,18 @@ public class PlayMusicActivity extends AppCompatActivity {
         imageView = findViewById(R.id.imageurl); // Lưu ý: ID bên XML phải là @+id/imageurl
         tvSingerName = findViewById(R.id.tvSingerName);
         seekBar = findViewById(R.id.seekBar);
+        secureStorage = new SecureStorage(PlayMusicActivity.this);
 
 
 
         i = getIntent();
-        tvSongName.setText(i.getStringExtra("songnama"));
+
+        tvSongName.setText(i.getStringExtra("songname"));
         tvSingerName.setText(i.getStringExtra("singername"));
         int songid = i.getIntExtra("songid",-1);
         if(songid == -1){finish();}else{
             ApiService apiService = RetrofitClient
-                    .getRetrofit("https://10.0.2.2:7007/", null) // Kiểm tra lại port cho đúng
+                    .getRetrofit( LoggedUser.loggedUser.getAccessToken()) // Kiểm tra lại port cho đúng
                     .create(ApiService.class);
             Call<Void> call = apiService.listensong(songid);
 
@@ -95,8 +99,8 @@ public class PlayMusicActivity extends AppCompatActivity {
 
         Glide.with(PlayMusicActivity.this)
                 .load(i.getStringExtra("avatarurl"))
-                .placeholder(R.drawable.ic_launcher_background) // Ảnh tạm
-                .error(R.drawable.ic_launcher_background)       // Ảnh lỗi
+                .placeholder(R.drawable.loadingimg) // Ảnh tạm
+                .error(R.drawable.ic_notfound)       // Ảnh lỗi
                 .into(imageView);
 
 
@@ -119,7 +123,7 @@ public class PlayMusicActivity extends AppCompatActivity {
                     btnPlayPause.setImageResource(mediaPlayer.isPlaying()?R.drawable.ic_pause:R.drawable.ic_play);
                 }
             } else {
-//                Toast.makeText(this, "Đang tải nhạc, vui lòng chờ...", Toast.LENGTH_SHORT).show();
+//
             }
         });
 
@@ -127,7 +131,7 @@ public class PlayMusicActivity extends AppCompatActivity {
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                // Chỉ tua khi người dùng kéo và mediaPlayer đã sẵn sàng
+
                 if (fromUser && mediaPlayer != null) {
                     mediaPlayer.seekTo(progress);
                 }

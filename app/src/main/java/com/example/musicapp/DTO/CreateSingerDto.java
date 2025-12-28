@@ -12,7 +12,7 @@ public class CreateSingerDto {
         this.imageUrl = imageUrl;
     }
 
-    // Getters and Setters (nếu cần thiết, hoặc để public nếu lười)
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 

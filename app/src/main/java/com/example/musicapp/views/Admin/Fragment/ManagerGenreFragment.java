@@ -12,12 +12,19 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.musicapp.DTO.CreateGenreDto;
+import com.example.musicapp.DTO.GenreDTO;
 import com.example.musicapp.R;
 import com.example.musicapp.commons.ApiService;
+import com.example.musicapp.commons.LoggedUser;
 import com.example.musicapp.commons.RetrofitClient;
+import com.example.musicapp.views.Admin.Adapter.GenreAdapter;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -26,6 +33,10 @@ import retrofit2.Response;
 public class ManagerGenreFragment extends Fragment {
 
     ExtendedFloatingActionButton btnadd;
+    RecyclerView recyclerView;
+    GenreAdapter adapter;
+
+
 
     public ManagerGenreFragment() {
         // Required empty public constructor
@@ -47,6 +58,14 @@ public class ManagerGenreFragment extends Fragment {
         btnadd.setOnClickListener(v -> {
             showAddGenreDialog();
         });
+        recyclerView = view.findViewById(R.id.rv_genres);
+
+
+         adapter = new GenreAdapter(getContext());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        loadGenres(adapter,"");
     }
 
     // Hàm hiển thị Dialog và xử lý thêm mới
@@ -94,7 +113,7 @@ public class ManagerGenreFragment extends Fragment {
         CreateGenreDto dto = new CreateGenreDto(name, image);
 
         // Gọi Retrofit
-        ApiService apiService = RetrofitClient.getRetrofit("https://10.0.2.2:7007/", null).create(ApiService.class);
+        ApiService apiService = RetrofitClient.getRetrofit( null).create(ApiService.class);
 
         apiService.addGenre(dto).enqueue(new Callback<Void>() {
             @Override
@@ -102,6 +121,8 @@ public class ManagerGenreFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Toast.makeText(getContext(), "Thêm thành công!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss(); // Đóng dialog
+                    loadGenres(adapter,"");
+
 
                     // loadData();
                 } else {
@@ -114,5 +135,34 @@ public class ManagerGenreFragment extends Fragment {
                 Toast.makeText(getContext(), "Lỗi mạng: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    public void loadGenres(GenreAdapter adapter, String keyword) {
+        ApiService apiService = RetrofitClient
+                .getRetrofit( LoggedUser.loggedUser.getAccessToken())
+                .create(ApiService.class);
+
+        Call<List<GenreDTO>> call = apiService.adminGetGenres(keyword);
+
+        call.enqueue(new Callback<List<GenreDTO>>() {
+            @Override
+            public void onResponse(Call<List<GenreDTO>> call,
+                                   Response<List<GenreDTO>> response) {
+                if (response.isSuccessful()) {
+                    adapter.setData(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GenreDTO>> call, Throwable t) {
+                if(getContext() != null) {
+                    Toast.makeText(getContext(), "Lỗi kết nối: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    t.printStackTrace();
+                }
+            }
+
+        });
+
+
+
     }
 }

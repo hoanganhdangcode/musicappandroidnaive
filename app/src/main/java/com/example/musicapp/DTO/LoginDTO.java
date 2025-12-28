@@ -25,4 +25,5 @@ public class LoginDTO {
         this.email = email;
         this.password = password;
     }
+
 }

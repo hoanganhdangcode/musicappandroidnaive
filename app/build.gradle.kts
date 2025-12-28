@@ -66,6 +66,20 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.11.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.11.0")
     implementation ("com.google.android.material:material:1.11.0")
+    implementation ("androidx.core:core-ktx:1.10.1")
+    implementation ("androidx.appcompat:appcompat:1.6.1")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation ("androidx.recyclerview:recyclerview:1.2.1")
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.6.2")
+    implementation ("androidx.security:security-crypto:1.1.0")
+    implementation ("androidx.biometric:biometric-compose:1.4.0-alpha05")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.6.0")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.6.0")
+    implementation ("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
+    implementation ("androidx.activity:activity-compose:1.7.2")
+    implementation ("androidx.compose.ui:ui:1.4.3")
+    implementation ("androidx.paging:paging-runtime:3.2.0")
+
 
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")

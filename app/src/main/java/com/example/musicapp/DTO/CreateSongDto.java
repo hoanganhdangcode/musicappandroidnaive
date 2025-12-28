@@ -5,8 +5,8 @@ public class CreateSongDto {
     private String description;
     private String audioUrl;
     private String imageUrl;
-    private int singerId; // Quan trọng: ID của ca sĩ
-    private int genreId;  // Quan trọng: ID của thể loại
+    private int singerId;
+    private int genreId;
 
     public CreateSongDto(String name, String description, String audioUrl, String imageUrl, int singerId, int genreId) {
         this.name = name;
@@ -17,5 +17,5 @@ public class CreateSongDto {
         this.genreId = genreId;
     }
 
-    // Getters Setters...
+
 }

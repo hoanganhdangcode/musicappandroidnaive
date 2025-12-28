@@ -26,8 +26,7 @@
         android:background="@drawable/bg_gradient_purple"
         android:hint="Tìm tên nghệ sĩ..."
         android:paddingHorizontal="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="#DDDDDD"
+        android:textColorHint="#bbb"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_artist"/>
 
     <androidx.recyclerview.widget.RecyclerView

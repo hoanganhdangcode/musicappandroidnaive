@@ -1,9 +1,11 @@
 package com.example.musicapp.views.User.UserMainFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,9 +19,11 @@ import com.example.musicapp.DTO.SingerTrendingDTO;
 import com.example.musicapp.DTO.SongTrendingDTO;
 import com.example.musicapp.R;
 import com.example.musicapp.commons.ApiService;
+import com.example.musicapp.commons.LoggedUser;
 import com.example.musicapp.commons.RetrofitClient;
 import com.example.musicapp.views.User.Adapter.SingerTrendingAdapter; // Đảm bảo import đúng
 import com.example.musicapp.views.User.Adapter.SongTrendingAdapter;
+import com.example.musicapp.views.User.SearchActivity;
 
 import java.util.List;
 
@@ -47,6 +51,10 @@ public class DiscoverFragment extends Fragment {
         // 1. Ánh xạ RecyclerView từ layout
         RecyclerView singerrcv = view.findViewById(R.id.rcvsingertrend);
         RecyclerView songrcv = view.findViewById(R.id.rvsongtrend);
+        ImageButton searchtn = view.findViewById(R.id.btn_search);
+        searchtn.setOnClickListener(v->{
+            startActivity(new Intent(getContext(), SearchActivity.class));
+        });
 
 
         // 2. Setup LayoutManager (2 hàng ngang)
@@ -75,7 +83,7 @@ public class DiscoverFragment extends Fragment {
     // Hàm gọi API
     public void loadTrendingSingers(SingerTrendingAdapter adapter) {
         ApiService apiService = RetrofitClient
-                .getRetrofit("https://10.0.2.2:7007/", null) // Kiểm tra lại Port và HTTPS
+                .getRetrofit( LoggedUser.loggedUser.getAccessToken()) // Kiểm tra lại port cho đúng
                 .create(ApiService.class);
 
         Call<List<SingerTrendingDTO>> call = apiService.getTrendingSingers();
@@ -107,7 +115,7 @@ public class DiscoverFragment extends Fragment {
     }
     public void loadTrendingSongs(SongTrendingAdapter adapter) {
         ApiService apiService = RetrofitClient
-                .getRetrofit("https://10.0.2.2:7007/", null) // Kiểm tra lại Port và HTTPS
+                .getRetrofit( LoggedUser.loggedUser.getAccessToken())
                 .create(ApiService.class);
 
         Call<List<SongTrendingDTO>> call = apiService.getTrendingSongs();

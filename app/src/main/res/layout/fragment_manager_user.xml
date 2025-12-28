@@ -26,11 +26,8 @@
         android:background="@drawable/bg_gradient_purple"
         android:hint="Tìm theo email hoặc tên..."
         android:paddingHorizontal="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="#DDDDDD"
-        android:drawableEnd="@drawable/ic_search"
-        android:drawableTint="@color/white"
-        android:drawablePadding="8dp"
+        android:textColorHint="#bbb"
+
         app:layout_constraintTop_toBottomOf="@+id/tv_title"/>
 
     <androidx.recyclerview.widget.RecyclerView

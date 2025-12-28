@@ -1,5 +1,6 @@
 package com.example.musicapp.views.User.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,7 +37,7 @@ public class SingerTrendingAdapter extends RecyclerView.Adapter<SingerTrendingAd
     @Override
     public SingerViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // Ánh xạ file layout item_singer_trending.xml vào Java
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.drawable.discover_singer_item, parent, false);
+        @SuppressLint("ResourceType") View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.discover_singer_item, parent, false);
         return new SingerViewHolder(view);
     }
 
@@ -58,8 +59,8 @@ public class SingerTrendingAdapter extends RecyclerView.Adapter<SingerTrendingAd
         // Lưu ý: Nếu ảnh bị lỗi hoặc null thì hiện ảnh mặc định (placeholder)
         Glide.with(context)
                 .load(singer.imageUrl)
-                .placeholder(R.mipmap.ic_launcher) // Ảnh chờ khi đang tải
-                .error(R.mipmap.ic_launcher)       // Ảnh hiện khi lỗi
+                .placeholder(R.drawable.loadingimg) // Ảnh chờ khi đang tải
+                .error(R.drawable.ic_notfound)       // Ảnh hiện khi lỗi
                 .into(holder.imgAvatar);
 
         // (Optional) Xử lý sự kiện click vào item

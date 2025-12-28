@@ -37,7 +37,7 @@ public class SongTrendingAdapter extends RecyclerView.Adapter<SongTrendingAdapte
     public SongViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // SỬA 1: Phải trỏ đến R.layout.song_trending_item (File XML giao diện)
         // Không được trỏ vào R.drawable
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.drawable.discover_song_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.discover_song_item, parent, false);
         return new SongViewHolder(view);
     }
 
@@ -63,8 +63,8 @@ public class SongTrendingAdapter extends RecyclerView.Adapter<SongTrendingAdapte
         // 5. Load ảnh bằng Glide
         Glide.with(context)
                 .load(song.getImageUrl())
-                .placeholder(R.drawable.ic_launcher_background) // Ảnh tạm
-                .error(R.drawable.ic_launcher_background)       // Ảnh lỗi
+                .placeholder(R.drawable.loadingimg) // Ảnh tạm
+                .error(R.drawable.ic_notfound)       // Ảnh lỗi
                 .into(holder.imgSong);
 
         // Sự kiện click

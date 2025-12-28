@@ -32,12 +32,11 @@ public class AdminMainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_admin_main);
 
-        // 1. Ánh xạ View
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
+//        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+//            return insets;
+//        });
 
 
 
@@ -49,11 +48,9 @@ public class AdminMainActivity extends AppCompatActivity {
 
 
 
-            // 2. Lấy NavController (Bắt buộc phải có để chuyển trang)
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.admin_nav_host_fragment);
 
-        // Kiểm tra null để tránh crash
         NavController navController = (navHostFragment != null) ? navHostFragment.getNavController() : null;
 
         ViewCompat.setOnApplyWindowInsetsListener(toolbar, (v, insets) -> {
@@ -61,6 +58,12 @@ public class AdminMainActivity extends AppCompatActivity {
             v.setPadding(0, systemBars.top, 0, 0);
             return insets;
         });
+        ViewCompat.setOnApplyWindowInsetsListener(navigationView, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(0, systemBars.top, 0, systemBars.bottom);
+            return insets;
+        });
+
 
         View headerview = navigationView.getHeaderView(0);
 
@@ -74,8 +77,8 @@ public class AdminMainActivity extends AppCompatActivity {
 
         Glide.with(AdminMainActivity.this)
                 .load(LoggedUser.loggedUser.avatarUrl)
-                .placeholder(R.drawable.ic_launcher_background) // Ảnh tạm
-                .error(R.drawable.ic_launcher_background)       // Ảnh lỗi
+                .placeholder(R.drawable.loadingimg)
+                .error(R.drawable.ic_user_notfound)
                 .into(imgvavatar);
         btndangxuat.setOnClickListener(v -> {
             LoggedUser.loggedUser = new User();
@@ -83,16 +86,16 @@ public class AdminMainActivity extends AppCompatActivity {
             finish();});
 
 
-            // 3. Setup mặc định ban đầu
+
         if (navigationView != null) navigationView.setCheckedItem(R.id.nav_genres);
         toolbar.setTitle("Quản lý thể loại");
 
-        // 4. Xử lý nút Menu (3 gạch) - Mở Drawer thủ công
+
         toolbar.setNavigationOnClickListener(v -> {
             drawerLayout.open();
         });
 
-        // 5. Xử lý sự kiện chọn Menu - THÊM LOGIC CHUYỂN TRANG VÀO ĐÂY
+
         navigationView.setNavigationItemSelectedListener(item -> {
             // Đóng menu trước cho gọn
             drawerLayout.close();

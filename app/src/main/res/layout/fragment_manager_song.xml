@@ -26,8 +26,7 @@
         android:background="@drawable/bg_gradient_purple"
         android:hint="Tên bài hát..."
         android:paddingHorizontal="16dp"
-        android:textColor="@android:color/white"
-        android:textColorHint="#DDDDDD"
+        android:textColorHint="#bbb"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_song"/>
 
     <androidx.recyclerview.widget.RecyclerView

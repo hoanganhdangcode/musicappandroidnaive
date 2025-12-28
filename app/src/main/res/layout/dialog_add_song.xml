@@ -10,6 +10,7 @@
         android:padding="20dp">
 
         <TextView
+            android:id="@+id/tv_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Thêm Bài Hát Mới"
@@ -25,22 +26,72 @@
         <EditText android:id="@+id/et_song_audio" android:hint="Link Audio (URL)" android:layout_marginTop="10dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
 
         <EditText android:id="@+id/et_song_image" android:hint="Link Ảnh Bìa (URL)" android:layout_marginTop="10dp" android:layout_width="match_parent" android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btn_select_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chọn ảnh bìa"
+            android:visibility="gone"
+            ></Button>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/selected_image"
+            android:autofillHints="Đang tải ảnh"
+            android:tooltipText="Đang tải ảnh"
+            android:visibility="gone"
+            ></ImageView>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/btn_delete_image"
+            android:text="Xóa ảnh"
+            android:visibility="gone"
+            android:backgroundTint="#ff0000"
+            ></Button>
 
         <EditText
-            android:id="@+id/et_song_singer_id"
-            android:hint="ID Ca sĩ (Nhập số)"
-            android:inputType="number"
+            android:id="@+id/et_song_singer_search"
+            android:hint="Tìm ca sĩ"
+
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ccc"
+            android:text="Đang chọn: "
+            android:id="@+id/tv_choosesinger"
+            ></TextView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_choosesinger"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
         <EditText
-            android:id="@+id/et_song_genre_id"
-            android:hint="ID Thể loại (Nhập số)"
-            android:inputType="number"
+            android:id="@+id/et_song_genre_search"
+            android:hint="Tìm thể loại "
+
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ccc"
+            android:text="Đang chọn: "
+            android:id="@+id/tv_choosegenre"
+            ></TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_choosegenre"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </LinearLayout>
 </ScrollView>

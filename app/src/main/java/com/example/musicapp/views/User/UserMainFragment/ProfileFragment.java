@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.bumptech.glide.Glide;
 import com.example.musicapp.R;
 import com.example.musicapp.commons.LoggedUser;
+import com.example.musicapp.commons.SecureStorage;
 import com.example.musicapp.models.User;
 import com.example.musicapp.views.LoginActivity;
 import com.example.musicapp.views.User.PlayMusicActivity;
@@ -26,6 +27,7 @@ public class ProfileFragment extends Fragment {
     TextView textView;
 
     Button btndangxuat;
+    SecureStorage secureStorage;
 
 
     public ProfileFragment() {
@@ -48,14 +50,17 @@ public class ProfileFragment extends Fragment {
 
         Glide.with(getActivity())
                 .load(LoggedUser.loggedUser.avatarUrl)
-                .placeholder(R.drawable.ic_launcher_background) // Ảnh tạm
-                .error(R.drawable.ic_launcher_background)       // Ảnh lỗi
+                .placeholder(R.drawable.loadingimg) // Ảnh tạm
+                .error(R.drawable.ic_user_notfound)       // Ảnh lỗi
                 .into(imageView);
+        secureStorage = new SecureStorage(getActivity());
+
+
         btndangxuat.setOnClickListener(v -> {
             LoggedUser.loggedUser = new User();
+            secureStorage.removepref();
             startActivity(new Intent(getContext(), LoginActivity.class));
             getActivity().finish();
-
         });
 
 

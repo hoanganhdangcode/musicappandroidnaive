@@ -83,7 +83,7 @@ public class SignupActivity extends AppCompatActivity {
         String email = etemail.getText().toString();
         String password = etpassword.getText().toString();
         ApiService apiService = RetrofitClient
-                .getRetrofit("https://10.0.2.2:7007/", null) // Kiểm tra lại port cho đúng
+                .getRetrofit( null)
                 .create(ApiService.class);
 
         btndangki.setEnabled(false);

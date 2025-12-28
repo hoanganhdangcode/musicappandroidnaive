@@ -18,6 +18,8 @@ import com.example.musicapp.R;
 import com.example.musicapp.commons.ApiService;
 import com.example.musicapp.commons.LoggedUser;
 import com.example.musicapp.commons.RetrofitClient;
+import com.example.musicapp.commons.SecureStorage;
+import com.example.musicapp.commons.StaticContant;
 import com.example.musicapp.models.User;
 import com.example.musicapp.views.Admin.AdminMainActivity;
 import com.example.musicapp.views.User.UserMainActivity;
@@ -28,6 +30,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
+    SecureStorage secureStorage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +56,13 @@ public class LoginActivity extends AppCompatActivity {
         loginbuttonview.setOnClickListener(v -> {
             login(emailview.getText().toString(), passwordview.getText().toString(),loginbuttonview);
         });
+        secureStorage = new SecureStorage(LoginActivity.this);
     
         
     }
     public void login(String email, String password,Button btnlogin){
         ApiService apiService = RetrofitClient
-                .getRetrofit("https://10.0.2.2:7007/", null)
+                .getRetrofit( null)
                 .create(ApiService.class);
         btnlogin.setEnabled(false);
         LoginDTO request = new LoginDTO(email, password);
@@ -77,20 +82,25 @@ public class LoginActivity extends AppCompatActivity {
                     user.setRole(dto.user.role);
                     user.setAccessToken(dto.accessToken);
                     LoggedUser.loggedUser=user;
+                    secureStorage.putInt(StaticContant.uidkey, user.getUserId());
+                   secureStorage.putString(StaticContant.tokenkey, user.getAccessToken());
 
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", 1).show();
+
+
+
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thành công", Toast.LENGTH_LONG).show();
                     startActivity(new Intent(LoginActivity.this,LoggedUser.loggedUser.role== User.RoleEnumType.User? UserMainActivity.class: AdminMainActivity.class));
                     finish();
 
                 } else {
-                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Kiểm tra lại thông tin đăng nhập", 0).show();
+                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Kiểm tra lại thông tin đăng nhập", Toast.LENGTH_LONG).show();
                 }
                 btnlogin.setEnabled(true);
             }
 
             @Override
             public void onFailure(Call<LoginResponseDTO> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, t.getMessage(),1);
+                Toast.makeText(LoginActivity.this, t.getMessage(),Toast.LENGTH_LONG);
                 btnlogin.setEnabled(true);
             }
         });
